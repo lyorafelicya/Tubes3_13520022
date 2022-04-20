@@ -1,19 +1,18 @@
-const addDisease = require('./controllers/AddDisease')
+const AddDiseaseController = require('./controllers/AddDiseaseController')
+const testController = require('./controllers/TestController')
+const searchController = require('./controllers/SearchController')
+const dnaUserPolicy = require('./policies/DNAUserPolicy')
+const dnaDiseasePolicy = require('./policies/DNADiseasePolicy')
 
 module.exports = (app) => {
-    // dummy
-    app.get('/status',(req,res) => {
-        res.send({
-            message:'hello world'
-        })
-    })
-
-    // check dna for a disease
-    app.post('/',(req,res) => {
-
-    })
-
     // add diseases data dna
-    app.post('/addDisease',addDisease.addData)
+    app.post('/addDisease',dnaDiseasePolicy.checkDNA,AddDiseaseController.addData)
+
+    // testing dna for a certain disease
+    app.post('/',dnaUserPolicy.checkDNA,testController.testDisease)
+
+    // searc test history
+    app.get('/search/:date?/:diseaseName?',searchController.getHistoryTests)
+
 
 }

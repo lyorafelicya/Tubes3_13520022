@@ -1,6 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
     const DNADisease = sequelize.define('DNADisease', {
-      DiseaseName: DataTypes.STRING,
+      DiseaseName: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
       DNASequence: DataTypes.TEXT
     })
   
