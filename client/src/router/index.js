@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import DNATest from '@/components/DNATest'
+import addDisease from '@/components/addDisease'
+import History from '@/components/History'
 
 Vue.use(Router)
 
@@ -8,8 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'DNATest',
+      component: DNATest
+    },
+    {
+      path: '/addDisease',
+      name: 'addDisease',
+      component: addDisease
+    },
+    {
+      path: '/search',
+      name: 'History',
+      component: History
     }
   ]
 })
