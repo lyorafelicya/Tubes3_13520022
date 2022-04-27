@@ -14,6 +14,11 @@ export default new Router({
       component: DNATest
     },
     {
+      path: '/:result',
+      name: 'DNATests',
+      component: History
+    },
+    {
       path: '/addDisease',
       name: 'addDisease',
       component: addDisease
@@ -22,6 +27,6 @@ export default new Router({
       path: '/search',
       name: 'History',
       component: History
-    }
+    },
   ]
 })

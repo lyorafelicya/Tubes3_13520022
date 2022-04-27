@@ -6,7 +6,7 @@ const StringAlgo = require('./StringAlgorithm')
 module.exports = {
     async testDisease(req,res){
         try{
-
+            console.log("mulai test")
             const dnaDisease = await DNADisease.findOne({
                 where:{
                     DiseaseName : req.body.DiseaseName // ini nama req dari formnya

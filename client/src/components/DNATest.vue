@@ -50,7 +50,7 @@
           <br>
 
           <v-btn
-            @click="Test">
+            @click="testDisease">
             Submit
           </v-btn>
           
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import addDiseaseService from '@/services/addDiseaseService'
+import TestService from '@/services/TestService'
 import TestHistoryPanel from '@/components/TestHistoryPanel'
 export default {
   data () {
@@ -141,6 +141,11 @@ export default {
       console.log(this.Username)
       console.log(this.DiseaseName)
       console.log(this.DNAUser)
+      try {
+        var result = await TestService.getTestResult({"Username":this.Username,"DiseaseName":this.DiseaseName,"DNAUser":this.DNAUser})
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   components: {
