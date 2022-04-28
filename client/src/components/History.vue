@@ -8,7 +8,7 @@
       <div v-for="history in TestHistory"
             :key="history.id">
             {{history.id}} -
-            {{history.TestDate}} -
+            {{history.TestDate | formatDate}} -
             {{history.Username}} -
             {{history.DiseaseName}} -
             {{history.Status}}
@@ -38,6 +38,9 @@ export default {
         immediate: true,
         async handler (dateValue, nameValue) {
           this.TestHistory = (await HistoryService.getHistoryTests(dateValue, nameValue)).data
+          for(dataDate of this.TestHistory.TestDate){
+            dataDate.TestDate = moment(dataDate.TestDate).format("YYYY-MM-DD")
+          }
         }
       }
     }

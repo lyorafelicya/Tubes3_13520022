@@ -7,6 +7,7 @@ import Vuetify from 'vuetify'
 import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.min.css'
 import store from '@/store/store'
+import moment from 'moment'
 
 Vue.config.productionTip = false
 
@@ -20,4 +21,11 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
+})
+
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('YYYY-MM-DD')
+  }
 })

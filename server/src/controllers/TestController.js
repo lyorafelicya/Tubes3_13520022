@@ -6,7 +6,6 @@ const StringAlgo = require('./StringAlgorithm')
 module.exports = {
     async testDisease(req,res){
         try{
-            console.log("mulai test")
             const dnaDisease = await DNADisease.findOne({
                 where:{
                     DiseaseName : req.body.DiseaseName // ini nama req dari formnya
@@ -17,9 +16,14 @@ module.exports = {
             // call string algo
             const percentage = StringAlgo.KMP(req.body.DNAUser,sequenceDNA)
     
+            let options = {
+                timeZone: 'Asia/Jakarta',
+            }
+
             // get current date
             const currentDate = new Date()
-            const dateString = currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+currentDate.getDate()
+            const dateString = currentDate.toISOString();
+
             
             const testData = await HistoryTest.create({
                 Username: req.body.Username,

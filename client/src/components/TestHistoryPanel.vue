@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import HistoryService from '@/services/HistoryService'
 export default {
     props: [
         'title'
@@ -36,7 +37,7 @@ export default {
       '$route.query.search':{
         immediate: true,
         async handler (value) {
-          this.TestHistory = (await HistoryService.getHistoryTest(value)).data
+          this.TestHistory = (await HistoryService.getHistoryTests(value)).data
         }
       }
     }

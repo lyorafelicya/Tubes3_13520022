@@ -8,6 +8,7 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
     host: config.HOST,
     dialect: config.DIALECT,
     operatorAliases: false,
+    timezone:"+07:00"
 });
 
 fs

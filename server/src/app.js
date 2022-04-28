@@ -12,6 +12,8 @@ app.use(cors())
 
 require('./routes')(app)
 
+process.env.TZ = "Asia/Jakarta";
+
 sequelize.sync({force:false})
     .then(() => {
         app.listen(config.port)

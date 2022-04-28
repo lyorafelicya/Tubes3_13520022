@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       DNASequence: DataTypes.TEXT,
       TestDate : DataTypes.DATE,
       percentage : DataTypes.FLOAT,
-      Status : DataTypes.BOOLEAN
+      Status : DataTypes.BOOLEAN,
     })
   
     HistoryTest.associate = function (models) {

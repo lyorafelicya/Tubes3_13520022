@@ -4,9 +4,8 @@ export default {
     getHistoryTests(search) {
         return Api().get('search', {
             params: {
-                //date: search,
-                diseaseName: search
+                search:search
             }
         })
-    }
+    },
 }
