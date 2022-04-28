@@ -35,13 +35,13 @@ export default {
             date: '27 April',
             Username: 'Jamal',
             DiseaseName: 'Malaria',
-            match: 'False'
+            statusTest: 'False'
           },
           {
             date: '12 April 2022',
             Username: 'yubsyu',
             DiseaseName: 'mabok tubes',
-            match: 'False'
+            statusTest: 'False'
           }
           ]
         }

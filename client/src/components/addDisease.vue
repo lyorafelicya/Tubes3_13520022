@@ -77,7 +77,6 @@ export default {
   methods: 
   {
   readFile() {
-    if (!this.DNADiseaseFile) {this.disease.DNADisease = "No File Chosen"}
     var reader = new FileReader();
     
     reader.readAsText(this.DNADiseaseFile);
@@ -96,8 +95,9 @@ export default {
       // }
       try {
         await addDiseaseService.post(this.disease)
-        //console.log(this.disease.DiseaseName)
-        //console.log(this.disease.DNADisease)
+        console.log(this.disease)
+        console.log(this.disease.DiseaseName)
+        console.log(this.disease.DNADisease)
       } catch (err) {
         console.log(err)
       }

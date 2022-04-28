@@ -67,25 +67,25 @@
           <h2> Hasil Tes </h2>
           <br>
 
-          <label for = "date"> Tanggal : </label>
-          <p placeholder="date"> {{date}} </p>
-          <br>
+          <span class="title"> Tanggal : </span>
+          <span class="result"> {{date}} </span>
+          <br><br>
 
-          <label for = "Username"> Pengguna : </label>
-          <p placeholder="Username"> {{Username}} </p>
-          <br>
+          <span class="title"> Pengguna : </span>
+          <span class="result"> {{username}} </span>
+          <br><br>
 
-          <label for = "DiseaseName"> Nama Penyakit : </label>
-          <p placeholder="DiseaseName"> {{DiseaseName}} </p>
-          <br>
+          <span class="title"> Nama Penyakit : </span>
+          <span class="result"> {{DiseaseNameResult}} </span>
+          <br><br>
 
-          <label for = "Persentase"> Persentase : </label>
-          <p placeholder="Persentase"> {{percentage}} </p>
-          <br>
+          <span class="title"> Persentase : </span>
+          <span class="result"> {{percentage}} </span>
+          <br><br>
 
-          <label for = "Status"> Hasil : </label>
-          <p placeholder="Status"> {{statusTest}} </p>
-          <br>
+          <span class="title"> Hasil : </span>
+          <span class="result"> {{statusTest}} </span>
+          <br><br>
 
         </v-card>
       </v-col>
@@ -113,8 +113,13 @@ export default {
       Username: '',
       DiseaseName: '',
       DNAUser:'',
+      DNAUserFile: null,
       error: null,
-      DNAUserFile: null
+      date: null,
+      username: null,
+      DiseaseNameResult: null,
+      percentage: null,
+      statusTest: null
     }
   },
   methods: {
@@ -132,6 +137,14 @@ export default {
       console.log(this.DNAUser)
       try {
         var result = await TestService.getTestResult({"Username":this.Username,"DiseaseName":this.DiseaseName,"DNAUser":this.DNAUser})
+        this.date = result.data.date
+        this.username = result.data.username
+        this.DiseaseNameResult = result.data.diseaseName
+        this.percentage = result.data.percentage
+        this.statusTest = result.data.statusTest
+        // console.log(result)   
+        // console.log(result.data.username)   
+        // console.log(result.data.statusTest)   
       } catch (err) {
         console.log(err)
       }
@@ -148,6 +161,19 @@ export default {
 /* .error {
   color: red;
 } */
+.result {
+  margin-top:5px;
+  color: white;
+  font-size: 18px;
+}
+
+.title {
+  color: #5F7464;
+  align-self:  center;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 h2 {
   color: white;
