@@ -1,10 +1,11 @@
 import Api from '@/services/Api'
 
 export default {
-    getHistoryTest(search) {
+    getHistoryTests(search) {
         return Api().get('search', {
             params: {
-                search: search
+                //date: search,
+                diseaseName: search
             }
         })
     }

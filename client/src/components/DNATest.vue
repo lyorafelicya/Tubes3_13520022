@@ -85,7 +85,9 @@
 
           <span class="title"> Hasil : </span>
           <span class="result"> {{statusTest}} </span>
-          <br><br>
+          <br><br><br>
+
+          <span class="error" v-if="error">{{error}}</span>
 
         </v-card>
       </v-col>
@@ -142,7 +144,8 @@ export default {
         this.DiseaseNameResult = result.data.diseaseName
         this.percentage = result.data.percentage
         this.statusTest = result.data.statusTest
-        // console.log(result)   
+        this.error = result.data.error
+        console.log(result)   
         // console.log(result.data.username)   
         // console.log(result.data.statusTest)   
       } catch (err) {
@@ -165,6 +168,10 @@ export default {
   margin-top:5px;
   color: white;
   font-size: 18px;
+}
+
+.error {
+  color:red;
 }
 
 .title {

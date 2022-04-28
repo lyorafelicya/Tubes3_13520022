@@ -8,6 +8,10 @@
       <h2> {{title}} </h2>
       <br>
 
+      <slot>
+        Data not found
+      </slot>
+
       <!-- <v-col>
         <div v-for="history in TestHistory"
             :key="history.id">

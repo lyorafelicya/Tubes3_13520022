@@ -7,10 +7,11 @@
     <testHistoryPanel title = "History">
       <div v-for="history in TestHistory"
             :key="history.id">
-            {{history.date}} -
+            {{history.id}} -
+            {{history.TestDate}} -
             {{history.Username}} -
             {{history.DiseaseName}} -
-            {{history.statusTest}}
+            {{history.Status}}
         </div>
     </testHistoryPanel>
 
@@ -29,35 +30,21 @@ export default {
     },
     data () {
         return {
-          //TestHistory : null
-          TestHistory: [
-          {
-            date: '27 April',
-            Username: 'Jamal',
-            DiseaseName: 'Malaria',
-            statusTest: 'False'
-          },
-          {
-            date: '12 April 2022',
-            Username: 'yubsyu',
-            DiseaseName: 'mabok tubes',
-            statusTest: 'False'
-          }
-          ]
+          TestHistory : null
         }
     },
-    // watch: {
-    //   '$route.query.search': {
-    //     immediate: true,
-    //     async handler (value) {
-    //       this.TestHistory = (await HistoryService.getHistoryTest(value)).data
-    //     }
-    //   }
-    // },
-    async mounted() {
-      this.TestHistory = (await HistoryService.getHistoryTest()).data
-      //console.log('disease', this.TestHistory)
+    watch: {
+      '$route.query.search': {
+        immediate: true,
+        async handler (dateValue, nameValue) {
+          this.TestHistory = (await HistoryService.getHistoryTests(dateValue, nameValue)).data
+        }
+      }
     }
+    // async mounted() {
+    //   this.TestHistory = (await HistoryService.getHistoryTest()).data
+    //   //console.log('disease', this.TestHistory)
+    // }
 }
 </script>
 

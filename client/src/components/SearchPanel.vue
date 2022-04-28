@@ -38,9 +38,9 @@ export default {
         //disini perlu cek inputnya tanggal doang atau nama penyakit doang atau duaduanya??
         if (this.search !== '') {
           route.query = {
-            // search: this.search
-            date: this.search,
-            diseaseName: this.search
+            search: this.search
+            // date: this.search,
+            // diseaseName: this.search
           }
         }
         this.$router.push(route)
