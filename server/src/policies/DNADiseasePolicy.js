@@ -1,12 +1,15 @@
 module.exports = {
     checkDNA(req, res, next) {
         var regex = /[^ATCG]+/;
+        console.log("test");
+        console.log(req.body.DNADisease);
         if (regex.test(req.body.DNADisease)) {
-            next();
-        } else {
             res.status(400).json({
-                message: "Invalid DNA"
+                message: "Invalid DNA",
+                seq:req.body.DNADisease
             });
+        } else {
+            next();
         }
     }
 }
