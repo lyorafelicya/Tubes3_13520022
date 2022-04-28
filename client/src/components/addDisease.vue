@@ -9,30 +9,35 @@
       <h2> Add Disease </h2>
       <br>
 
-      <v-col>
-        <v-text-field
-            solo
-            class = "input"
-            label="Disease Name"
-            v-model="disease.DiseaseName"
-            placeholder = "Disease Name">
-        </v-text-field>
-      </v-col>
+      <h3> Nama Penyakit : </h3>
+      <v-text-field
+          solo
+          class = "input"
+          label="Disease Name"
+          v-model="disease.DiseaseName"
+          placeholder = "Disease Name">
+      </v-text-field>
+   
 
       <br>
 
+      <h3> Sequence DNA Penyakit : </h3>
       <v-file-input
             dense
             class ="input"
             label="DNA Sequence"
-            ref="doc"
-            v-model="disease.DNADisease"
+            accept=".txt"
+            v-model="DNADiseaseFile"
             placeholder = "DNA Sequence File"
-            @change="readFile()">
+            @change="readFile">
       </v-file-input>
 
       <br><br>
       <!-- <div class = "error" v-html ="error"/> -->
+      <br>
+
+      <span class="error" v-if="error">{{ error }}</span>
+
       <br>
 
       <v-btn
@@ -40,6 +45,16 @@
       >Add</v-btn>
       
     </v-card>
+
+    <br><br>
+    <v-footer width="100%">
+        <v-col
+          class="text-center"
+          cols="12"
+        >
+          2022 — <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+        </v-col>
+    </v-footer>
     
   </div>
 </template>
@@ -47,44 +62,46 @@
 <script>
 import addDiseaseService from '@/services/addDiseaseService'
 import TestHistoryPanel from '@/components/TestHistoryPanel'
+
 export default {
   data () {
     return {
       disease: {
         DiseaseName: null,
-        file: null,
-        DNADisease: null
-      }
+        DNADisease: null,
+      },
+      DNADiseaseFile: null
+      //error: null
     }
   },
   methods: 
   {
+  readFile() {
+    if (!this.DNADiseaseFile) {this.disease.DNADisease = "No File Chosen"}
+    var reader = new FileReader();
+    
+    reader.readAsText(this.DNADiseaseFile);
+    reader.onload = () => {
+      this.disease.DNADisease = reader.result;
+    }
+  },
     async addData() {
+      // this.error = null
+      // const allFieldsFilled = Object
+      //   .keys(this.disease)
+      //   .every(key => !!disease[key])
+      // if(!allFieldsFilled) {
+      //   this.error = 'Please fill all fields'
+      //   return
+      // }
       try {
         await addDiseaseService.post(this.disease)
+        //console.log(this.disease.DiseaseName)
+        //console.log(this.disease.DNADisease)
       } catch (err) {
         console.log(err)
       }
     }
-  },
-  readFile() {
-      this.file = this.$refs.doc.files[0];
-      const reader = new FileReader();
-      if (this.file.name.includes(".txt")) {
-        reader.onload = (res) => {
-          this.content = res.target.result;
-          this.DNADisease = this.content;
-        };
-        reader.onerror = (err) => console.log(err);
-        reader.readAsText(this.file);
-      } else {
-        this.content = "check the console for file output";
-        reader.onload = (res) => {
-          // console.log(res.target.result);
-        };
-        reader.onerror = (err) => console.log(err);
-        reader.readAsText(this.file);
-      }
   },
   components: {
     TestHistoryPanel
@@ -100,6 +117,15 @@ export default {
 
 h2 {
   color: white;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: white;
+  text-align:  left;
+  font-size: 15px;
+  margin-left: 240px;
+  margin-bottom: 10px;
 }
 
 .input {

@@ -8,11 +8,15 @@
       <h2> {{title}} </h2>
       <br>
 
-      <v-col>
-        <slot>
-            <!-- No Slot Content Defined -->
-        </slot>
-      </v-col>
+      <!-- <v-col>
+        <div v-for="history in TestHistory"
+            :key="history.id">
+            {{history.date}} -
+            {{history.Username}} -
+            {{history.DiseaseName}} -
+            {{history.statusTest}}
+        </div>
+      </v-col> -->
     </v-card>
 
      
@@ -23,7 +27,15 @@
 export default {
     props: [
         'title'
-    ]
+    ],
+    watch: {
+      '$route.query.search':{
+        immediate: true,
+        async handler (value) {
+          this.TestHistory = (await HistoryService.getHistoryTest(value)).data
+        }
+      }
+    }
 }
 </script>
 

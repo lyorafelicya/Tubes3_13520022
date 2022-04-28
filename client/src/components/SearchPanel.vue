@@ -12,8 +12,8 @@
         <v-text-field
             solo
             class ="input"
-            label="result"
-            v-model="result"
+            label="Search"
+            v-model="search"
             placeholder = "Search by date, disease name, or both">
         </v-text-field>
       </v-col>
@@ -27,27 +27,30 @@
 export default {
     data() {
       return {
-        result: ''
+        search: ''
       }
     },
     watch: {
-      result(value) {
+      search(value) {
         const route = {
-          name: 'history'
+          name: 'History'
         }
-        if (this.result != '') {
+        //disini perlu cek inputnya tanggal doang atau nama penyakit doang atau duaduanya??
+        if (this.search !== '') {
           route.query = {
-            result: this.result
+            // search: this.search
+            date: this.search,
+            diseaseName: this.search
           }
         }
         this.$router.push(route)
         // console.log(value)
       },
       '$route.query.search': {
-        // immediate: true,
-        // handler (value) {
-        //   this.search = value
-        // }
+        immediate: true,
+        handler (value) {
+          this.search = value
+        }
       }
     }
 }

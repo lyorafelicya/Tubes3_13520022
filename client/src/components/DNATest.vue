@@ -11,36 +11,36 @@
           <h2> DNA Test </h2>
           <br>
 
-          <v-col>
-            <v-text-field
+          <h3> Nama Pengguna : </h3>
+          <v-text-field
                 solo
                 class ="input"
                 label="Your Name"
                 v-model="Username"
                 placeholder = "Name">
-            </v-text-field>
-          </v-col>
-
-          <v-col>
-            <v-text-field
-                solo
-                class = "input"
-                label="Disease Name"
-                v-model="DiseaseName"
-                placeholder = "Disease Name">
-            </v-text-field>
-          </v-col>
+          </v-text-field>
+   
+          <h3> Prediksi Penyakit : </h3>
+          <v-text-field
+              solo
+              class = "input"
+              label="Disease Name"
+              v-model="DiseaseName"
+              placeholder = "Disease Name">
+          </v-text-field>
 
           <br>
 
+          <h3> Sequence DNA Pengguna : </h3>
+          <br>
           <v-file-input
                 dense
                 class = "input"
                 ref="doc"
                 label="DNA User"
-                v-model="DNAUser"
+                v-model="DNAUserFile"
                 placeholder = "DNA Sequence File"
-                @change="readFile()">
+                @change="readFile">
           </v-file-input>
 
           <br>
@@ -112,31 +112,20 @@ export default {
     return {
       Username: '',
       DiseaseName: '',
-      file: '',
       DNAUser:'',
-      error: null
+      error: null,
+      DNAUserFile: null
     }
   },
   methods: {
     readFile() {
-      this.file = this.$refs.doc.files[0];
-      const reader = new FileReader();
-      if (this.file.name.includes(".txt")) {
-        reader.onload = (res) => {
-          this.content = res.target.result;
-          this.DNAUser = this.content;
-        };
-        reader.onerror = (err) => console.log(err);
-        reader.readAsText(this.file);
-      } else {
-        this.content = "check the console for file output";
-        reader.onload = (res) => {
-          // console.log(res.target.result);
-        };
-        reader.onerror = (err) => console.log(err);
-        reader.readAsText(this.file);
-      }
-    },
+    var reader = new FileReader();
+    
+    reader.readAsText(this.DNAUserFile);
+    reader.onload = () => {
+      this.DNAUser = reader.result;
+    }
+  },
     async testDisease() {
       console.log(this.Username)
       console.log(this.DiseaseName)
@@ -163,6 +152,15 @@ export default {
 h2 {
   color: white;
   align-self:  center;
+  margin-bottom: 15px;
+}
+
+h3 {
+  color: white;
+  text-align:  left;
+  font-size: 15px;
+  margin-left: 40px;
+  margin-bottom: 10px;
 }
 
 label {

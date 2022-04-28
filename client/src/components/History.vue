@@ -5,15 +5,15 @@
     </searchPanel>
 
     <testHistoryPanel title = "History">
-        <div v-for="history in TestHistory"
-            :key="history.DiseaseName">
+      <div v-for="history in TestHistory"
+            :key="history.id">
             {{history.date}} -
             {{history.Username}} -
             {{history.DiseaseName}} -
             {{history.statusTest}}
-        
         </div>
     </testHistoryPanel>
+
   </div>
 </template>
 
@@ -29,26 +29,35 @@ export default {
     },
     data () {
         return {
-          TestHistory : null
-            // TestHistory: [{
-            //     date: '27 April',
-            //     Username: 'Jamal',
-            //     DiseaseName: 'Malaria',
-            //     match: 'False'
-            // }]
+          //TestHistory : null
+          TestHistory: [
+          {
+            date: '27 April',
+            Username: 'Jamal',
+            DiseaseName: 'Malaria',
+            match: 'False'
+          },
+          {
+            date: '12 April 2022',
+            Username: 'yubsyu',
+            DiseaseName: 'mabok tubes',
+            match: 'False'
+          }
+          ]
         }
     },
-    watch: {
-      '$route.query.search': {
-        immediate: true,
-        async handler (value) {
-          this.TestHistory = (await HistoryService.getHistoryTest(value)).data
-        }
-      }
+    // watch: {
+    //   '$route.query.search': {
+    //     immediate: true,
+    //     async handler (value) {
+    //       this.TestHistory = (await HistoryService.getHistoryTest(value)).data
+    //     }
+    //   }
+    // },
+    async mounted() {
+      this.TestHistory = (await HistoryService.getHistoryTest()).data
+      //console.log('disease', this.TestHistory)
     }
-    // async mounted() {
-    //   this.TestHistory = await HistoryService.getHistoryTest()
-    // }
 }
 </script>
 
