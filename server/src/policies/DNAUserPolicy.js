@@ -10,12 +10,3 @@ module.exports = {
         }
     }
 }
-
-        // DNA validation with regex -> dna = req.body.DNAUser
-        // if(invalid){
-        //     res.send({
-        //         error:'DNA not valid'
-        //     })
-        // }else{
-        //     next()
-        // }
