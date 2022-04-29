@@ -54,9 +54,6 @@ export default {
         immediate: true,
         async handler (dateValue, nameValue) {
           this.TestHistory = (await HistoryService.getHistoryTests(dateValue, nameValue)).data
-          for(dataDate of this.TestHistory.TestDate){
-            dataDate.TestDate = moment(dataDate.TestDate).format("YYYY-MM-DD")
-          }
         }
       }
     }
