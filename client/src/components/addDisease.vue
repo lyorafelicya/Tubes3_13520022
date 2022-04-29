@@ -14,6 +14,8 @@
           solo
           class = "input"
           label="Disease Name"
+          required
+          :rules="[v => !!v || 'Disease Name is required']"
           v-model="disease.DiseaseName"
           placeholder = "Disease Name">
       </v-text-field>
@@ -26,6 +28,8 @@
             dense
             class ="input"
             label="DNA Sequence"
+            required
+            :rules="[v => !!v || 'DNA sequence file is required']"
             accept=".txt"
             v-model="DNADiseaseFile"
             placeholder = "DNA Sequence File"
@@ -87,12 +91,14 @@ export default {
   },
     async addData() {
       try {
+          
         await addDiseaseService.post(this.disease)
         console.log(this.disease.DiseaseName)
         console.log(this.disease.DNADisease)
-
-        this.disease.DiseaseName = " "
-        this.DNADiseaseFile = " "
+      
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => (input.value = null));
+        this.DNADiseaseFile = null
         this.error = " "
 
       } catch (err) {

@@ -15,7 +15,8 @@
           <v-text-field
                 solo
                 class ="input"
-                id="name"
+                required
+                :rules="[v => !!v || 'Name is required']"
                 label="Your Name"
                 v-model="Username"
                 placeholder = "Name">
@@ -26,7 +27,8 @@
               solo
               class = "input"
               label="Disease Name"
-              id="disease"
+              required
+              :rules="[v => !!v || 'Disease Name is required']"
               v-model="DiseaseName"
               placeholder = "Disease Name">
           </v-text-field>
@@ -39,7 +41,8 @@
                 dense
                 class = "input"
                 label="DNA User"
-                id="dna"
+                required
+                :rules="[v => !!v || 'DNA Sequence file is required']"
                 v-model="DNAUserFile"
                 placeholder = "DNA Sequence File"
                 @change="readFile">
