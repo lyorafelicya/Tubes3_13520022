@@ -4,7 +4,7 @@
     <v-card
       align="center"
       class="card"
-      width="80%">
+      width="60%">
 
       <h2> Add Disease </h2>
       <br>
@@ -32,13 +32,11 @@
             @change="readFile">
       </v-file-input>
 
-      <br><br>
-      <!-- <div class = "error" v-html ="error"/> -->
-      <br>
+      <br><br><br>
 
       <span class="error" v-if="error">{{ error }}</span>
 
-      <br>
+      <br><br>
 
       <v-btn
         @click="addData"
@@ -47,12 +45,15 @@
     </v-card>
 
     <br><br>
-    <v-footer width="100%">
+    
+    <v-footer width="100%" class="footer">
         <v-col
           class="text-center"
           cols="12"
         >
-          2022 — <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+          © 2022 <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+          <br>
+          By : Hansel - Lyora - Prima
         </v-col>
     </v-footer>
     
@@ -70,8 +71,8 @@ export default {
         DiseaseName: null,
         DNADisease: null,
       },
-      DNADiseaseFile: null
-      //error: null
+      DNADiseaseFile: null,
+      error: null,
     }
   },
   methods: 
@@ -85,21 +86,17 @@ export default {
     }
   },
     async addData() {
-      // this.error = null
-      // const allFieldsFilled = Object
-      //   .keys(this.disease)
-      //   .every(key => !!disease[key])
-      // if(!allFieldsFilled) {
-      //   this.error = 'Please fill all fields'
-      //   return
-      // }
       try {
         await addDiseaseService.post(this.disease)
-        console.log(this.disease)
         console.log(this.disease.DiseaseName)
         console.log(this.disease.DNADisease)
+
+        this.disease.DiseaseName = " "
+        this.DNADiseaseFile = " "
+        this.error = " "
+
       } catch (err) {
-        console.log(err)
+        this.error = err.response.data.message
       }
     }
   },
@@ -109,12 +106,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* .error {
-  color: red;
-} */
-
 h2 {
   color: white;
   margin-bottom: 20px;
@@ -124,13 +116,25 @@ h3 {
   color: white;
   text-align:  left;
   font-size: 15px;
-  margin-left: 240px;
+  margin-left: 140px;
   margin-bottom: 10px;
+}
+
+.footer {
+  background-color: #697184;
+  color: white;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.error {
+  color:red;
+  font-weight: bold;
 }
 
 .input {
   color: white;
-  width: 50%;
+  width: 60%;
 }
 
 .card {
@@ -141,6 +145,6 @@ h3 {
   margin:auto;
   background: #eca1a6;
   border: 2px solid #eea29a;
+  margin-bottom: 50px;
 }
-
 </style>

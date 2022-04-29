@@ -5,17 +5,33 @@
     </searchPanel>
 
     <testHistoryPanel title = "History">
-      <div v-for="history in TestHistory"
+      <div class="searchResult" v-for="(history,index) in TestHistory"
             :key="history.id">
-            {{history.id}} -
+            {{index+1}} -
             {{history.TestDate | formatDate}} -
             {{history.Username}} -
+            {{history.percentage}} -
             {{history.DiseaseName}} -
             {{history.Status}}
         </div>
     </testHistoryPanel>
 
+    <br><br><br>
+
+    <v-footer width="100%" class="footer">
+        <v-col
+          class="text-center"
+          cols="12"
+        >
+          © 2022 <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+          <br>
+          By : Hansel - Lyora - Prima
+        </v-col>
+    </v-footer>
+
   </div>
+
+  
 </template>
 
 <script>
@@ -30,7 +46,7 @@ export default {
     },
     data () {
         return {
-          TestHistory : null
+          TestHistory : null,
         }
     },
     watch: {
@@ -74,6 +90,19 @@ h2 {
   margin:auto;
   background: #eca1a6;
   border: 2px solid #eea29a;
+}
+
+.footer {
+  background-color: #697184;
+  color: white;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.searchResult {
+  color: white;
+  margin-top:10px;
+  font-size: 18px;
 }
 
 </style>

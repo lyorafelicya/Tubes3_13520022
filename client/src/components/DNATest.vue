@@ -15,6 +15,7 @@
           <v-text-field
                 solo
                 class ="input"
+                id="name"
                 label="Your Name"
                 v-model="Username"
                 placeholder = "Name">
@@ -25,6 +26,7 @@
               solo
               class = "input"
               label="Disease Name"
+              id="disease"
               v-model="DiseaseName"
               placeholder = "Disease Name">
           </v-text-field>
@@ -36,8 +38,8 @@
           <v-file-input
                 dense
                 class = "input"
-                ref="doc"
                 label="DNA User"
+                id="dna"
                 v-model="DNAUserFile"
                 placeholder = "DNA Sequence File"
                 @change="readFile">
@@ -57,7 +59,6 @@
         </v-card>
       </v-col>
 
-
       <v-col cols="6">
         <v-card
           align="left"
@@ -68,7 +69,7 @@
           <br>
 
           <span class="title"> Tanggal : </span>
-          <span class="result"> {{date}} </span>
+          <span class="result"> {{date | formatDate}} </span>
           <br><br>
 
           <span class="title"> Pengguna : </span>
@@ -94,12 +95,15 @@
     </v-row>
 
     <br><br>
-    <v-footer width="100%">
+    
+    <v-footer width="100%" class="footer">
         <v-col
           class="text-center"
           cols="12"
         >
-          2022 — <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+          © 2022 <strong>Tugas Besar 3 IF2211 Strategi Algoritma</strong>
+          <br>
+          By : Hansel - Lyora - Prima
         </v-col>
     </v-footer>
 
@@ -109,6 +113,7 @@
 <script>
 import TestService from '@/services/TestService'
 import TestHistoryPanel from '@/components/TestHistoryPanel'
+
 export default {
   data () {
     return {
@@ -145,25 +150,23 @@ export default {
         this.percentage = result.data.percentage
         this.statusTest = result.data.statusTest
         this.error = result.data.error
-        console.log(result)   
-        // console.log(result.data.username)   
-        // console.log(result.data.statusTest)   
+
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => (input.value = null));
+        this.DNAUserFile = null
+
       } catch (err) {
-        console.log(err)
+        this.error = err.response.data.message
       }
     }
   },
   components: {
     TestHistoryPanel
-  }
+  },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* .error {
-  color: red;
-} */
 .result {
   margin-top:5px;
   color: white;
@@ -172,6 +175,7 @@ export default {
 
 .error {
   color:red;
+  font-weight: bold;
 }
 
 .title {
@@ -180,6 +184,13 @@ export default {
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: bold;
+}
+
+.footer {
+  background-color: #697184;
+  color: white;
+  font-size: 15px;
+  margin-top: 20px;
 }
 
 h2 {
@@ -212,6 +223,7 @@ label {
   overflow: hidden;
   border-radius: 20px;
   margin-left: 100px;
+  margin-bottom: 40px;
   /* margin:auto; */
   background: #eca1a6;
   border: 2px solid #eea29a;

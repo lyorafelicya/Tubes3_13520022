@@ -6,9 +6,9 @@
       width="80%">
 
       <h2> Search </h2>
-      <br>
 
       <v-col>
+        <p> Input Format : (YYYY-MM-DD) (Disease Name) </p>
         <v-text-field
             solo
             class ="input"
@@ -35,16 +35,12 @@ export default {
         const route = {
           name: 'History'
         }
-        //disini perlu cek inputnya tanggal doang atau nama penyakit doang atau duaduanya??
         if (this.search !== '') {
           route.query = {
             search: this.search
-            // date: this.search,
-            // diseaseName: this.search
           }
         }
         this.$router.push(route)
-        // console.log(value)
       },
       '$route.query.search': {
         immediate: true,
@@ -56,10 +52,15 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h2 {
   color: white;
+}
+
+p {
+  color: #525E75;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
 
 .input {

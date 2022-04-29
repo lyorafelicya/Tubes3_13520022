@@ -11,19 +11,8 @@
       <slot>
         Data not found
       </slot>
-
-      <!-- <v-col>
-        <div v-for="history in TestHistory"
-            :key="history.id">
-            {{history.date}} -
-            {{history.Username}} -
-            {{history.DiseaseName}} -
-            {{history.statusTest}}
-        </div>
-      </v-col> -->
     </v-card>
 
-     
   </div>
 </template>
 
@@ -44,7 +33,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 h2 {
