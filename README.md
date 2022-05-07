@@ -20,3 +20,13 @@ Node js, Windows OS
 9.	Untuk cek history dan menambahkan penyakit baru, silakan masukan input sesuai dengan yang diminta oleh form.
 10.	Tekan logo aplikasi untuk kembali ke laman awal (laman tes DNA).
 
+## Screenshots
+### 1. Main page
+![main page](https://user-images.githubusercontent.com/82488797/167245780-06a58ca2-c518-4c8c-b8b1-f98e5f896599.jpg)
+
+### 2. Search test history
+![search](https://user-images.githubusercontent.com/82488797/167245785-a9e70275-8aa6-4158-abb7-256b1ba31a7d.jpg)
+
+### 3. Add new disease
+![add disease](https://user-images.githubusercontent.com/82488797/167245788-9963cb75-6918-42ab-bcb0-6416ff75d289.jpg)
+
